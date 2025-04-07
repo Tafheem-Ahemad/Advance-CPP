@@ -3,8 +3,7 @@
 /*
 
 Recursive Mutex
-
-
+  
 NOTES:
 0. It is same as mutex but, Same thread can lock one mutex multiple times using recursive mutex.
 1. If thread T1 first call lock/try_lock on recursive mutex ml, then ml is locked by T1, no as T1 is running in recursion T1 can call lock/try_lock any number of times there is no issue.
