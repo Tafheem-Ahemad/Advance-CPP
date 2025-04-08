@@ -25,10 +25,29 @@ BOTTOM LINE:
 #define fast() ios_base::sync_with_stdio(false); cin.tie(NULL);
 using namespace std;
 
+recursive_mutex mtx; // recursive mutex
+int cnt = 0;
+
+void fun(int a,int n){
+	if(n == 0) return;
+
+	mtx.lock();
+	cnt++;
+	cout << "Thread " << a << " is running" << endl;
+	fun(a, n-1);
+	mtx.unlock();
+}
+
 int main(){
 	fast();
 
+	thread t1(fun,1, 5); 
+	thread t2(fun,2, 5); 
 
+	t1.join(); 
+	t2.join();
+
+	cout<<cnt<<endl;
 
 	return 0;
 }
